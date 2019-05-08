@@ -25,4 +25,4 @@ Pagination.propTypes= {
     currentPage: PropTypes.number.isRequired, 
     onPageChanged: PropTypes.func.isRequired
 }
-export default Pagination;
+export default Pagination; 
