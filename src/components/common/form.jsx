@@ -71,7 +71,7 @@ class Form extends Component {
                     value={data[name]} 
                     onChange={this.handleChange}
                     error={errors[name]}
-                    type={type}/>); 
+                    type={type}/>)
     }
 
     renderSelect(name, label, options){
