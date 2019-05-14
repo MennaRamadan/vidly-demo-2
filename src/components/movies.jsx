@@ -6,6 +6,7 @@ import Pagination from './common/pagination';
 import Paginate from '../utils/paginate';
 import ListGroup from './common/listGroup';
 import MoviesTable from './moviesTable';
+import SearchBoxh from './common/searchBox';
 import _ from 'lodash';
 
 class Movies extends Component {
@@ -75,6 +76,7 @@ class Movies extends Component {
             </div>
             <div className="col">
                     <Link className="btn btn-primary mb-2" to="/movies/new">New Movie</Link>
+                    <SearchBoxh value={value} onChange={this.handleSearch} />
                     <p>Showing {totalCount} movies in the database</p>
                     <MoviesTable 
                         movies={movies}
