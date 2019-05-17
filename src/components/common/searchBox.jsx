@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
-const SearchBox = () => {
+const SearchBox = ({value, onChange}) => {
     return (
         <input 
-        className="form-control mr-sm-2" 
-        type="search" placeholder="Search"/>
+        className="form-control my-3" 
+        type="text"
+        name="query"
+        value={value}
+        onChange={e => onChange(e.currentTarget.value)} 
+        placeholder="Search ..."/>
     );
 }
 
