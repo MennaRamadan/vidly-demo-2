@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Form from './common/form';
 import Joi from 'joi-browser';
-import {getGenres} from '../services/fakeGenreService';
-import {getMovie, saveMovie} from '../services/fakeMovieService';
+// import {getGenres} from '../services/fakeGenreService';
+// import {getMovie, saveMovie} from '../services/fakeMovieService';
+import {getGenres} from '../services/genreService';
+import {getMovie, saveMovie} from '../services/movieService';
 
 class MovieForm extends Form {
     state = { 
@@ -19,18 +21,28 @@ class MovieForm extends Form {
          dailyRentalRate: Joi.number().required().min(0).max(10).label("Rate")
      }
 
-     componentDidMount(){
-        const geners = getGenres();
+     async populateGenres(){
+        const {data: geners} = await getGenres();
         this.setState({geners});
-
-        const movieId = this.props.match.params.id;
-        if(movieId === "new") return;
-
-        const movie = getMovie(movieId);
-        if(!movie) return this.props.history.replace("/not-found");
-
-        this.setState({data: this.mapToViewModel(movie)});
      }
+
+     async populateMovie(){
+        try{
+            const movieId = this.props.match.params.id;
+            if(movieId === "new") return;
+            const {data: movie} = await getMovie(movieId);
+            this.setState({data: this.mapToViewModel(movie)});
+        }
+        catch(ex){
+            if(ex.response && ex.response.status === 404)
+                 this.props.history.replace("/not-found");
+        }
+     }
+
+    async componentDidMount(){
+        await this.populateGenres()
+        await this.populateMovie();
+    }
 
      mapToViewModel(movie){
          return{
@@ -42,9 +54,9 @@ class MovieForm extends Form {
          }
      }
 
-     doSubmit = () => {
+      doSubmit = async () => {
         //here we will call the server
-        saveMovie(this.state.data);
+        await saveMovie(this.state.data);
         this.props.history.push('/movies');
 
         // console.log("Submit from movie form");
