@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link , NavLink} from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({user}) => {
     return ( <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <Link className="navbar-brand" to="/">Vidly</Link>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,12 +18,24 @@ const NavBar = () => {
         <li className="nav-item">
           <NavLink className="nav-link" to="/rentals">Rentals</NavLink>
         </li>
-        <li className="nav-item">
+       { !user && (
+       <React.Fragment>
+         <li className="nav-item">
           <NavLink className="nav-link" to="/login">Login</NavLink>
         </li>
         <li className="nav-item">
           <NavLink className="nav-link" to="/register">Register</NavLink>
+       </li> </React.Fragment>
+       )}
+       { user && (
+       <React.Fragment>
+         <li className="nav-item">
+          <NavLink className="nav-link" to="/profile">{user.name}</NavLink>
         </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/logout">Logout</NavLink>
+       </li> </React.Fragment>
+       )}
       </ul>
     </div>
   </nav> );
