@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
 import Form from './common/form';
+import {login} from '../services/authService';
 
 class LoginForm extends Form {
 
@@ -18,6 +19,8 @@ class LoginForm extends Form {
     doSubmit = () => {
         //here we will call the server
         console.log('submit');
+        const {data} = this.state;
+        login(data.username, data.password);
     }
 
     render() { 
