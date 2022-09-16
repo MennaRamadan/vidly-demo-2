@@ -7,7 +7,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
-    "bootstrap": "^4.1.1",
+    "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "joi-browser": "^13.4.0",
     "lodash": "^4.17.10",
